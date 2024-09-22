@@ -17,7 +17,31 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('user_type');
             $table->rememberToken();
+            $table->timestamps();
+        });
+
+        Schema::create('student_details', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('address')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('interest')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('teacher_details', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('address')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('is_verified');
+            $table->string('file');
             $table->timestamps();
         });
 
@@ -43,6 +67,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('student_details');
+        Schema::dropIfExists('teacher_details');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');
     }

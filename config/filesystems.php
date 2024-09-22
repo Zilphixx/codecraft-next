@@ -29,10 +29,17 @@ return [
     */
 
     'disks' => [
-
+        
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
+            'serve' => true,
+            'throw' => false,
+        ],
+
+        'teacher-id' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private/teachers-attachments'),
             'serve' => true,
             'throw' => false,
         ],
