@@ -5,12 +5,10 @@ use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Http\Controllers\RegisteredUserController;
 
-Route::get('/', function () {
-    return view('landing-page');
-});
+Route::get('/', fn() => view('landing-page'));
 
 
-Route::middleware(['auth', 'verified'])->group(function() {
+Route::middleware(['auth', 'verified', 'verified.teachers'])->group(function() {
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
@@ -42,4 +40,8 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     
     Route::post('/be-a-teacher', [RegisteredUserController::class, 'store'])
         ->middleware(['guest:'.config('fortify.guard')]);
+    
+    Route::get('/for-approval', fn() => view('auth.teacher-approval-prompt'))
+        ->middleware(['auth:'.config('fortify.guard')])
+        ->name('for.approval.notice');
 });

@@ -14,10 +14,7 @@
                         Wait for Admin Approval
                     </h1>
                     <p class="mb-4 text-md">
-                        Thanks for signing up! Before getting started, 
-                        could you verify your email address by clicking on the 
-                        link we just emailed to you? If you didn't receive the email, 
-                        we will gladly send you another.
+                        Thanks for signing up! Before you get started, please wait for your account approval. An admin needs to verify your registration details first. We will notify you of your status once it's done.
                     </p>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
